@@ -1,0 +1,46 @@
+help video URL: https://drive.google.com/file/d/1pqahsUp7S7bhNqOvDkI1EhSiXtwoYtAH/view?usp=sharing
+
+code for search result page: 
+<?php 
+/*code pasted by zain to show to random selected images to show as a member profile pictures if members do not have a member profile. */
+
+				// zain did to show category image if user has no image
+				
+				$imgLogo = $user[image_main_file];
+				if($imgLogo =="/images/profile-profile-holder.png")
+				{
+					$categoryz = $user['service_name'];
+					$myquery = mysql(brilliantDirectories::getDatabaseConfiguration('database'), "SELECT upg.group_name, IFNULL((SELECT CONCAT('/photos/main/',up.file) AS group_image FROM `users_portfolio` AS up WHERE up.group_id = upg.group_id ORDER BY RAND() LIMIT 1), 0) AS group_image FROM `users_portfolio_groups` AS upg, `users_data` AS ud, `subscription_types` AS st WHERE upg.user_id = ud.user_id AND ud.subscription_id = st.subscription_id AND upg.data_id = '71' AND upg.group_name LIKE '%$categoryz%'");
+					$myresult = mysql_fetch_array($myquery);
+					$imgLogo = $myresult['group_image'];
+					if($imgLogo == "")
+					{
+						$imgLogo = $user[image_main_file];
+					}
+				} 
+				// zain did to show category image if user has no image
+?>
+
+
+
+codde for details page: 
+
+<?php 
+/*code pasted by zain to show to random selected images to show as a member profile pictures if members do not have a member profile. */
+
+				// zain did to show category image if user has no image
+				
+				$imgLogo = $userPhoto;
+				if($imgLogo =="/images/profile-profile-holder.png")
+				{
+					$categoryz = $user['service_name'];
+					$myquery = mysql(brilliantDirectories::getDatabaseConfiguration('database'), "SELECT upg.group_name, IFNULL((SELECT CONCAT('/photos/main/',up.file) AS group_image FROM `users_portfolio` AS up WHERE up.group_id = upg.group_id ORDER BY RAND() LIMIT 1), 0) AS group_image FROM `users_portfolio_groups` AS upg, `users_data` AS ud, `subscription_types` AS st WHERE upg.user_id = ud.user_id AND ud.subscription_id = st.subscription_id AND upg.data_id = '71' AND upg.group_name LIKE '%$categoryz%'");
+					$myresult = mysql_fetch_array($myquery);
+					$imgLogo = $myresult['group_image'];
+					if($imgLogo == "")
+					{
+						$imgLogo = $userPhoto;
+					}
+				} 
+				// zain did to show category image if user has no image
+?>
